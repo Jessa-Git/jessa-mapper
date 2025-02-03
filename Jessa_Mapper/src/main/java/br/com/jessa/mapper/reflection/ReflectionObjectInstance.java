@@ -1,0 +1,24 @@
+package br.com.jessa.mapper.reflection;
+
+import java.lang.reflect.Method;
+
+import br.com.jessa.mapper.exception.JessaMapperException;
+
+public class ReflectionObjectInstance {
+	
+	public static Object byMethod(Method method){
+        Object objectToReturn = null;
+        try{
+        	Class<?> returnObject = method.getReturnType();
+            if(returnObject!=null && !"void".equals(returnObject.getName())){
+
+                objectToReturn = returnObject.getConstructor().newInstance();
+            }
+        }catch (Exception e){
+            JessaMapperException.out(e,"Erro ao gerar instancia para metodo.");
+        }
+
+        return objectToReturn;
+    }
+
+}
