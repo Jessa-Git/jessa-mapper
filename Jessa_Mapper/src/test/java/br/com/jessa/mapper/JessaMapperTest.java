@@ -53,6 +53,27 @@ public class JessaMapperTest {
         JessaMapper.implement(MapperTestInterface.class).toTestIntegerSourceMapToDestiny(sourceTest);
         
     }
+    @Test
+    public void testMapperFromEnumObject(){
+        MapperObjectTestDestiny sourceTest = new MapperObjectTestDestiny();
+        sourceTest.setType(MapperObjectTestDestiny.typePerson.GOBLIN);
+        MapperObjectTestSource destinyTest;
+        destinyTest= JessaMapper.implement(MapperTestInterface.class).toTestEnumSourceMapToDestiny(sourceTest);
+        assertNotNull(destinyTest);
+        assertEquals(sourceTest.getType().toString(),destinyTest.getType());
+    }
+ 
+ 
+ @Test
+    public void testMapperToEnumObject(){
+	 MapperObjectTestSource sourceTest = new MapperObjectTestSource();
+        sourceTest.setType(MapperObjectTestDestiny.typePerson.GOBLIN.toString());
+        MapperObjectTestDestiny destinyTest;
+        destinyTest= JessaMapper.implement(MapperTestInterface.class).toTestToEnumSourceMapToDestiny(sourceTest);
+        
+        assertNotNull(destinyTest);
+        assertEquals(sourceTest.getType(),destinyTest.getType().toString());
+    }
 
     @Test
     public void testMapperVoid(){

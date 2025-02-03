@@ -14,6 +14,12 @@ public interface MapperTestInterface extends ToInterfaceMapper{
 
     @Mapper(mapping = {@CaseMap(source = "moneyPerson",destiny = "moneyPerson")})
     public MapperObjectTestDestiny toTestDoubleSourceMapToDestiny(MapperObjectTestSource obj);
+    
+    @Mapper(mapping = {@CaseMap(source = "type",destiny = "type")})
+    public MapperObjectTestDestiny toTestToEnumSourceMapToDestiny(MapperObjectTestSource obj);
+    @Mapper(mapping = {@CaseMap(source = "type",destiny = "type")})
+    public MapperObjectTestSource toTestEnumSourceMapToDestiny(MapperObjectTestDestiny obj);
+    
 
 
     public MapperObjectTestDestiny toTestSourceMapToDestinyNoAnnotations(MapperObjectTestSource obj);
