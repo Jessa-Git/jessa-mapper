@@ -47,4 +47,9 @@ public class JessaMapperException extends RuntimeException {
         if(parameterTypes.length>1)throw new JessaMapperException(s);
     }
 
+	public static void privateConstructor() {
+		throw new JessaMapperException("Classe não pode criar objeto, utilizar apenas métodos staticos");
+		
+	}
+
 }
