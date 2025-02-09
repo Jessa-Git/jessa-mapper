@@ -1,15 +1,20 @@
 package br.com.jessa.mapper.convert;
 
+import java.lang.reflect.Method;
+
 import br.com.jessa.mapper.exception.JessaMapperException;
 
 public class ConvertToPrimitive<T> extends ConvertModel<T> {
 	private final Class<T> aClass;
 	
+	
 	private boolean hasConvertValue;
 
-	public ConvertToPrimitive(Class<T> aClass) {
+	public ConvertToPrimitive(Class<T> aClass, Method methodSetDestiny, Method getSourceMethod) {
 		this.aClass = aClass;
 		this.hasConvertValue = false;
+		this.getSourceMethod=getSourceMethod;
+		this.methodSetDestiny=methodSetDestiny;
 	}
 
 	public ConvertToPrimitive<T> tryTo(HowToConvert d) {

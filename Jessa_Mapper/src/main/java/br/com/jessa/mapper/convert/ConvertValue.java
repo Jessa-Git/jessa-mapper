@@ -1,6 +1,12 @@
 package br.com.jessa.mapper.convert;
 
+import br.com.jessa.mapper.exception.ExceptionsMessages;
+import br.com.jessa.mapper.exception.JessaMapperException;
+
 public class ConvertValue {
+	ConvertValue() {
+		throw new JessaMapperException(ExceptionsMessages.privateConstructor.getMessage());
+	}
 	 @SuppressWarnings("unchecked")
 		public static HowToConvert toInt(Object b){
 	        return new HowToConvert(b) {

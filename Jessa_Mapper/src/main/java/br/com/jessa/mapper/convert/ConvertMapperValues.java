@@ -2,23 +2,25 @@ package br.com.jessa.mapper.convert;
 
 import java.lang.reflect.Method;
 
+import br.com.jessa.mapper.exception.ExceptionsMessages;
 import br.com.jessa.mapper.exception.JessaMapperException;
 
 public class ConvertMapperValues {
 	
-	private ConvertMapperValues(){
-		JessaMapperException.privateConstructor();
+	ConvertMapperValues(){
+		throw new JessaMapperException(ExceptionsMessages.privateConstructor.getMessage());
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public static Object tryToConvert(Object sourceElement, Class[] destinyElement, Method mapperMethod) {
+	public static Object tryToConvert(Object sourceElement, Method methodSetDestiny, Method mapperMethod,Method getSourceMethod) {
+		Class[] destinyElement = methodSetDestiny.getParameterTypes();
         if(sourceElement == null)return null;
-        return  convert(sourceElement, destinyElement[0],mapperMethod);
+        return  convert(sourceElement, destinyElement[0],mapperMethod,methodSetDestiny,getSourceMethod);
     }
 
 
-    public static <T> Object convert( Object sourceElement,  Class<T> aClass, Method mapperMethod) {
-    	Object y= new ConvertToPrimitive<T>(aClass)
+    public static <T> Object convert( Object sourceElement,  Class<T> aClass, Method mapperMethod,Method methodSetDestiny,Method getSourceMethod) {
+    	Object y= new ConvertToPrimitive<T>(aClass,methodSetDestiny,getSourceMethod)
                 .tryTo(ConvertValue.toInt(sourceElement))
                 .tryTo(ConvertValue.toDouble(sourceElement))
                 .tryTo(ConvertValue.toString(sourceElement))
@@ -35,4 +37,5 @@ public class ConvertMapperValues {
     	JessaMapperException.isNull(y);
     	return y;
     }
+
 }

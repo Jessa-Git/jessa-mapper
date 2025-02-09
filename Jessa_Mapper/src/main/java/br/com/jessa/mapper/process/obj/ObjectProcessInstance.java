@@ -5,18 +5,11 @@ import java.util.Map;
 import br.com.jessa.mapper.exception.JessaMapperException;
 
 public class ObjectProcessInstance {
-	private Object objectSource;
     private Object objectDestiny;
 
     private Map<String, ObjectClassMap> sourceMap;
 
-	public Object getObjectSource() {
-		return objectSource;
-	}
-
-	public void setObjectSource(Object objectSource) {
-		this.objectSource = objectSource;
-	}
+	
 
 	public Object getObjectDestiny() {
 		return objectDestiny;

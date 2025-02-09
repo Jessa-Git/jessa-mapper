@@ -10,6 +10,7 @@ import br.com.jessa.mapper.exception.JessaMapperException;
 import br.com.jessa.mapper.process.obj.DetectClass;
 import br.com.jessa.mapper.process.obj.ObjectClassMap;
 import br.com.jessa.mapper.reflection.ReflectionObjectInstance;
+import br.com.jessa.mapper.reflection.ReflectionObjectInvoke;
 
 public class ProcessMapObjectClass {
 	
@@ -56,29 +57,10 @@ public class ProcessMapObjectClass {
         }
     }
 	private static Object getNewObject(ObjectClassMap cls,Object reference) {
-		Object suRef= null;
-		try {
-    		suRef=cls.getMethodGet().invoke(reference);
-    		setNewObject(cls, reference, suRef);
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return suRef;
+		return new ReflectionObjectInvoke(cls.getMethodGet()).invoke(reference);
 	}
 	private static void setNewObject(ObjectClassMap cls,Object reference, Object suRef ) {
-		try {
-			cls.getMethodSet().invoke(reference, suRef);
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		new ReflectionObjectInvoke(cls.getMethodSet()).invoke(reference, suRef);
 	}
 	private static String naming(String a,String b) {
 		if(a !=null)

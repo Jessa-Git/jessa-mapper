@@ -48,15 +48,7 @@ public class ObjectClassMap {
 		this.field = field;
 	}
 
-	@Override
-	public String toString() {
-		String ret;
-		ret = "ClassObject{" + "methodGet=" + (methodGet == null ? "Metodo GET NULL" : methodGet.getName())
-				+ ", methodSet=" + (methodSet == null ? "Metodo SET NULL" : methodSet.getName()) + ", field="
-				+ (field == null ? "Field  NULL" : field.getName()) + '}';
 
-		return ret;
-	}
 
 	public Object getReference() {
 		return reference;

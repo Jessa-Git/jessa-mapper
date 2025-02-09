@@ -45,7 +45,7 @@ public class MapperHandler implements InvocationHandler{
              ObjectClassMap destinMapObject = destinyMap.get(sourceObjectClass.getColumnName());
              Method methodSetDestiny = MapperValidation.failIfNull(destinMapObject).getMethodSet();
              
-             valueGetBySource = ConvertMapperValues.tryToConvert(valueGetBySource,methodSetDestiny.getParameterTypes(),method);
+             valueGetBySource = ConvertMapperValues.tryToConvert(valueGetBySource,methodSetDestiny,method,sourceObjectClass.getMethodGet());
              
              new ReflectionObjectInvoke(methodSetDestiny).invoke(destinMapObject.getReference(),valueGetBySource);
              

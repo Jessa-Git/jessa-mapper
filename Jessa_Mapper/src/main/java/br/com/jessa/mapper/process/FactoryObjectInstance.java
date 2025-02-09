@@ -6,7 +6,6 @@ public class FactoryObjectInstance {
 	public ObjectProcessInstance create(Object sourcer, Object destiny) {
 		ObjectProcessInstance instance = new ObjectProcessInstance();
 
-		instance.setObjectSource(sourcer);
 		instance.setObjectDestiny(destiny);
 		instance.setSourceMap(ProcessMapObjectClass.generateMapObjectClass(sourcer,true));
 		instance.populateCoumnName();
