@@ -2,9 +2,9 @@ package br.com.jessa.mapper.convert;
 
 import br.com.jessa.mapper.exception.JessaMapperException;
 
-public class ConvertToPrimitive<T> {
+public class ConvertToPrimitive<T> extends ConvertModel<T> {
 	private final Class<T> aClass;
-	private T value;
+	
 	private boolean hasConvertValue;
 
 	public ConvertToPrimitive(Class<T> aClass) {
@@ -13,12 +13,20 @@ public class ConvertToPrimitive<T> {
 	}
 
 	public ConvertToPrimitive<T> tryTo(HowToConvert d) {
+	
 		if (hasConvertValue)
 			return this;
-		if (!isEnumConvert(d) && !isReturnClassEqualsDestinyClass(d))
+		if (!isEnumConvert(d) && !isReturnClassEqualsDestinyClass(d)) {
 			return this;
-
-		value = doThis(d);
+		}
+		setValue(doThis(d)); 
+		hasConvertValue = true;
+		return this;
+	}
+	
+	
+	public ConvertToPrimitive<T> tryToClass(HowToConvert d) {		
+		setValue(doThis(d)); 
 		hasConvertValue = true;
 		return this;
 	}
@@ -31,18 +39,7 @@ public class ConvertToPrimitive<T> {
 		return aClass.isEnum() && Enum.class.equals(getClassReturnNewValue(d));
 	}
 
-	private static <T> T doThis(HowToConvert h) {
-		T b = null;
-		try {
-
-			b = h.newValue(h.getValue());
-
-		} catch (Exception e) {
-
-			JessaMapperException.out(e, "Falha ao tentar converter valor");
-		}
-		return b;
-	}
+	
 
 	private static Class<?> getClassReturnNewValue(HowToConvert d) {
 		try {
@@ -52,9 +49,6 @@ public class ConvertToPrimitive<T> {
 		}
 	}
 
-	public T getValue() {
-		JessaMapperException.isNull(value);
-		return value;
-	}
+	
 
 }

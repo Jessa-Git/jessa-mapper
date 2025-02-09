@@ -1,4 +1,4 @@
-package br.com.jessa.mapper.process;
+package br.com.jessa.mapper.process.obj;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -9,6 +9,7 @@ public class ObjectClassMap {
 	private Method methodGet;
 	private Method methodSet;
 	private Field field;
+	private Object reference;
 
 	public Method getMethodGet() {
 		return methodGet;
@@ -55,6 +56,14 @@ public class ObjectClassMap {
 				+ (field == null ? "Field  NULL" : field.getName()) + '}';
 
 		return ret;
+	}
+
+	public Object getReference() {
+		return reference;
+	}
+
+	public void setReference(Object reference) {
+		this.reference = reference;
 	}
 
 }

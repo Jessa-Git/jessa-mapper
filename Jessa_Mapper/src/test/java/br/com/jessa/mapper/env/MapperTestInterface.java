@@ -26,4 +26,11 @@ public interface MapperTestInterface extends ToInterfaceMapper{
     
     @Mapper(mapping = {@CaseMap(source = "moneyPerson",destiny = "moneyPerson")})
     public void toTestVoid(MapperObjectTestSource obj, MapperObjectTestDestiny ob);
+    
+    @Mapper(mapping = {@CaseMap(source = "t1",destiny = "sub")})
+    public MapperObjectTestDestiny toTestSubClass(MapperObjectTestSource obj);
+    
+    
+    @Mapper(mapping = {@CaseMap(source = "cname",destiny = "a.name")})
+    public B toTestSubClass3(C obj);
 }

@@ -1,0 +1,71 @@
+package br.com.jessa.mapper;
+
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.util.Map;
+
+import br.com.jessa.mapper.annotations.CaseMap;
+import br.com.jessa.mapper.annotations.Mapper;
+import br.com.jessa.mapper.convert.ConvertMapperValues;
+import br.com.jessa.mapper.exception.JessaMapperException;
+import br.com.jessa.mapper.process.FactoryObjectInstance;
+import br.com.jessa.mapper.process.ProcessMapObjectClass;
+import br.com.jessa.mapper.process.obj.ObjectClassMap;
+import br.com.jessa.mapper.process.obj.ObjectProcessInstance;
+import br.com.jessa.mapper.reflection.ReflectionObjectInstance;
+import br.com.jessa.mapper.reflection.ReflectionObjectInvoke;
+
+public class MapperHandler implements InvocationHandler{
+	
+	 @Override
+	    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+		 
+		 
+		 ObjectProcessInstance instance = new FactoryObjectInstance().create(getObjectSource(args), getObjectDestiny(method, args));
+		 
+		Mapper mapperInterface = method.getAnnotation(Mapper.class);
+        if(mapperInterface != null) {
+	        for(CaseMap attr : mapperInterface.mapping()){
+	        	if(instance.getSourceMap().containsKey(attr.source())) {
+	        		MapperValidation.failIfNull(instance.getSourceMap().get(attr.source())).setColumnName(attr.destiny());
+	        		System.out.println("COUL:"+attr.source()+"/"+attr.destiny());
+	        	}
+	                
+	        }
+        }
+        
+        
+        Map<String, ObjectClassMap> destinyMap = ProcessMapObjectClass.generateMapObjectClass(instance.getObjectDestiny());
+        for(Map.Entry<String, ObjectClassMap> sourceObject:instance.getSourceMap().entrySet()){
+        	System.out.println("INI ....................");
+        	ObjectClassMap sourceObjectClass = sourceObject.getValue();
+        	
+        	 if(!destinyMap.containsKey(sourceObjectClass.getColumnName()))continue;
+        	 System.out.println("Find key:"+sourceObjectClass.getColumnName());
+             //Object valueGetBySource = new ReflectionObjectInvoke(sourceObjectClass.getMethodGet()).invoke(instance.getObjectSource());
+        	 Object valueGetBySource = new ReflectionObjectInvoke(sourceObjectClass.getMethodGet()).invoke(sourceObjectClass.getReference());
+             ObjectClassMap destinMapObject = destinyMap.get(sourceObjectClass.getColumnName());
+             System.out.println(sourceObjectClass.getColumnName()+"> Hand:"+destinMapObject.toString());
+        	 Method methodSetDestiny = MapperValidation.failIfNull(destinMapObject).getMethodSet();
+             valueGetBySource = ConvertMapperValues.tryToConvert(valueGetBySource,methodSetDestiny.getParameterTypes(),method);
+             new ReflectionObjectInvoke(methodSetDestiny).invoke(destinMapObject.getReference(),valueGetBySource);
+             System.out.println("END ....................");
+        }
+		 
+		 
+	       return instance.getObjectDestiny();
+	    }
+
+	 private Object getObjectSource(Object[] args){
+	        JessaMapperException.checkSourceObject(args);
+	        return args[0];
+	    }
+	    private Object getObjectDestiny(Method method, Object[] args){
+	    	String methodClassReturn = method.getReturnType().getSimpleName();
+	        if ("void".equals(methodClassReturn)) {
+	            return args[1];
+	        }
+	        return ReflectionObjectInstance.byMethod(method);
+	    }
+
+}

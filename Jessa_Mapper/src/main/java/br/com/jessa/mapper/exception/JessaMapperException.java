@@ -1,5 +1,6 @@
 package br.com.jessa.mapper.exception;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 public class JessaMapperException extends RuntimeException {
@@ -16,7 +17,7 @@ public class JessaMapperException extends RuntimeException {
 	}
 
 	protected static String mensagem(String msg) {
-		return "[Mapper error] - " + msg;
+		return "\n[Mapper error] - " + msg;
 	}
 
 	public static void checkSourceObject(Object[] args) {
@@ -37,18 +38,25 @@ public class JessaMapperException extends RuntimeException {
             m = ""+getMethod.getName();
         }
         if(instance !=null){
-            s = s+"("+instance.getClass().getSimpleName()+")"+instance.toString()+" Method:"+m;
+            s = s+"("+instance.getClass().getSimpleName()+")"+" Method:"+m;
         }else{
             s = s+" [Instancia NULL]";
         }
-        throw new JessaMapperException(e.getMessage()+"["+s+"]");
-    }
+        throw new JessaMapperException("Erro "+s+"\n"+e.getMessage());
+        }
 	public static void methodWithMoreParameterThanOne(String s, Class<?>[] parameterTypes) {
         if(parameterTypes.length>1)throw new JessaMapperException(s);
     }
 
 	public static void privateConstructor() {
 		throw new JessaMapperException("Classe não pode criar objeto, utilizar apenas métodos staticos");
+		
+	}
+
+	public static void protectStackOverFlowByClass(Class<? extends Object> reference,Field field ) {
+		 Class<?> fieldClass = field.getType();
+		if(reference.equals(fieldClass))
+			throw new JessaMapperException("Over Flow Protect: Class "+reference.getSimpleName()+ " contains field ["+fieldClass.getSimpleName()+" "+field.getName()+"] with same class");
 		
 	}
 

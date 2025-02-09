@@ -15,6 +15,8 @@ public class MapperObjectTestDestiny {
     private typePerson type;
 
     private String code;
+    
+    private MapperSubObjectTest sub;
 
     public String getCode() {
         return code;
@@ -55,4 +57,20 @@ public class MapperObjectTestDestiny {
     public void setType(typePerson type) {
         this.type = type;
     }
+
+	public MapperSubObjectTest getSub() {
+		return sub;
+	}
+
+	public void setSub(MapperSubObjectTest sub) {
+		this.sub = sub;
+	}
+
+	@Override
+	public String toString() {
+		return "MapperObjectTestDestiny [namePerson=" + namePerson + ", agePerson=" + agePerson + ", moneyPerson="
+				+ moneyPerson + ", type=" + type + ", code=" + code + ", sub=" + sub + "]";
+	}
+	
+	
 }

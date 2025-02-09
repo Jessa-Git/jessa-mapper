@@ -13,7 +13,7 @@ public class JessaMapper {
 		mapGeneric = Proxy.newProxyInstance(
 				interfaceMapper.getClassLoader(), 
 				new Class[] { interfaceMapper },
-				new ProcessMapper());
+				new MapperHandler());
 		
 		JessaMapperException.isNull(mapGeneric);
 

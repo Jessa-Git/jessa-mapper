@@ -18,7 +18,18 @@ public class ReflectionObjectInstance {
             JessaMapperException.out(e,"Erro ao gerar instancia para metodo.");
         }
 
+        System.out.println("....ByMeth:"+objectToReturn);
         return objectToReturn;
+    }
+	
+	public static Object byClasss(Class classToInstance){
+        try{
+                return  classToInstance.getConstructor().newInstance();
+        }catch (Exception e){
+            JessaMapperException.out(e,"Erro ao gerar instancia para Classe.");
+        }
+
+        throw new JessaMapperException("Falha ao gerar Objeto por class:"+classToInstance.getSimpleName());
     }
 
 }
