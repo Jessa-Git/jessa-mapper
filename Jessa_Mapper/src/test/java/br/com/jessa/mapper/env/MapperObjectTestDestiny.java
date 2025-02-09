@@ -12,13 +12,23 @@ public class MapperObjectTestDestiny {
 
     private Double moneyPerson;
 
-    private typePerson type;
+    private typePerson typins;
 
     private String code;
     
     private MapperSubObjectTest sub;
+    
+    
 
-    public String getCode() {
+    public typePerson getTypins() {
+		return typins;
+	}
+
+	public void setTypins(typePerson typins) {
+		this.typins = typins;
+	}
+
+	public String getCode() {
         return code;
     }
 
@@ -50,14 +60,7 @@ public class MapperObjectTestDestiny {
         this.moneyPerson = moneyPerson;
     }
 
-    public typePerson getType() {
-        return type;
-    }
-
-    public void setType(typePerson type) {
-        this.type = type;
-    }
-
+ 
 	public MapperSubObjectTest getSub() {
 		return sub;
 	}
@@ -69,7 +72,7 @@ public class MapperObjectTestDestiny {
 	@Override
 	public String toString() {
 		return "MapperObjectTestDestiny [namePerson=" + namePerson + ", agePerson=" + agePerson + ", moneyPerson="
-				+ moneyPerson + ", type=" + type + ", code=" + code + ", sub=" + sub + "]";
+				+ moneyPerson + ", type=" + typins + ", code=" + code + ", sub=" + sub + "]";
 	}
 	
 	

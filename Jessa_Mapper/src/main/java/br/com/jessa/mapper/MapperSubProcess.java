@@ -22,7 +22,7 @@ public class MapperSubProcess {
 
 		instance.setObjectSource(source);
 		instance.setObjectDestiny(destiny);
-		instance.setSourceMap(ProcessMapObjectClass.generateMapObjectClass(instance.getObjectSource().getClass()));
+		instance.setSourceMap(ProcessMapObjectClass.generateMapObjectClass(instance.getObjectSource().getClass(),true));
 		instance.populateCoumnName();
 
 		Mapper mapperInterface = mapperMethod.getAnnotation(Mapper.class);
@@ -36,19 +36,18 @@ public class MapperSubProcess {
 
 
 
-		JessaMapperException.isNull(instance.getObjectDestiny());
-		Map<String, ObjectClassMap> destinyMap = ProcessMapObjectClass.generateMapObjectClass(instance.getObjectDestiny());
-        for(Map.Entry<String, ObjectClassMap> sourceObject:instance.getSourceMap().entrySet()){
-        	ObjectClassMap sourceObjectClass = sourceObject.getValue();
-        	 if(!destinyMap.containsKey(sourceObjectClass.getColumnName()))continue;
-             //Object valueGetBySource = new ReflectionObjectInvoke(sourceObjectClass.getMethodGet()).invoke(instance.getObjectSource());
-        	 Object valueGetBySource = new ReflectionObjectInvoke(sourceObjectClass.getMethodGet()).invoke(sourceObjectClass.getReference());
-             ObjectClassMap destinMapObject = destinyMap.get(sourceObjectClass.getColumnName());
-        	 Method methodSetDestiny = MapperValidation.failIfNull(destinMapObject).getMethodSet();
-             valueGetBySource = ConvertMapperValues.tryToConvert(valueGetBySource,methodSetDestiny.getParameterTypes(),mapperMethod);
-             new ReflectionObjectInvoke(methodSetDestiny).invoke(destinMapObject.getReference(),valueGetBySource);
-        }
-		 
+		 Map<String, ObjectClassMap> destinyMap = ProcessMapObjectClass.generateMapObjectClass(instance.getObjectDestiny(),false);
+	        for(Map.Entry<String, ObjectClassMap> sourceObject:instance.getSourceMap().entrySet()){
+	        	ObjectClassMap sourceObjectClass = sourceObject.getValue();
+	        	
+	        	 if(!destinyMap.containsKey(sourceObjectClass.getColumnName()))continue;
+	        	 Object valueGetBySource = new ReflectionObjectInvoke(sourceObjectClass.getMethodGet()).invoke(sourceObjectClass.getReference());
+	             ObjectClassMap destinMapObject = destinyMap.get(sourceObjectClass.getColumnName());
+	             Method methodSetDestiny = MapperValidation.failIfNull(destinMapObject).getMethodSet();
+	             valueGetBySource = ConvertMapperValues.tryToConvert(valueGetBySource,methodSetDestiny.getParameterTypes(),mapperMethod);
+	             new ReflectionObjectInvoke(methodSetDestiny).invoke(destinMapObject.getReference(),valueGetBySource);
+	             
+	        }
 		 
 	       return instance.getObjectDestiny();
 	}

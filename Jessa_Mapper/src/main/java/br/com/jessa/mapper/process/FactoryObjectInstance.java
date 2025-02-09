@@ -8,9 +8,8 @@ public class FactoryObjectInstance {
 
 		instance.setObjectSource(sourcer);
 		instance.setObjectDestiny(destiny);
-		instance.setSourceMap(ProcessMapObjectClass.generateMapObjectClass(instance.getObjectSource()));
+		instance.setSourceMap(ProcessMapObjectClass.generateMapObjectClass(sourcer,true));
 		instance.populateCoumnName();
-
 		return instance;
 	}
 

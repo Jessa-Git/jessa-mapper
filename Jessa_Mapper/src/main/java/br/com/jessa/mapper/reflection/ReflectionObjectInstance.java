@@ -18,7 +18,6 @@ public class ReflectionObjectInstance {
             JessaMapperException.out(e,"Erro ao gerar instancia para metodo.");
         }
 
-        System.out.println("....ByMeth:"+objectToReturn);
         return objectToReturn;
     }
 	

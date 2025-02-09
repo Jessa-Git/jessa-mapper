@@ -28,30 +28,28 @@ public class MapperHandler implements InvocationHandler{
 	        for(CaseMap attr : mapperInterface.mapping()){
 	        	if(instance.getSourceMap().containsKey(attr.source())) {
 	        		MapperValidation.failIfNull(instance.getSourceMap().get(attr.source())).setColumnName(attr.destiny());
-	        		System.out.println("COUL:"+attr.source()+"/"+attr.destiny());
+	        		
 	        	}
 	                
 	        }
         }
         
         
-        Map<String, ObjectClassMap> destinyMap = ProcessMapObjectClass.generateMapObjectClass(instance.getObjectDestiny());
+        Map<String, ObjectClassMap> destinyMap = ProcessMapObjectClass.generateMapObjectClass(instance.getObjectDestiny(),false);
+        
         for(Map.Entry<String, ObjectClassMap> sourceObject:instance.getSourceMap().entrySet()){
-        	System.out.println("INI ....................");
         	ObjectClassMap sourceObjectClass = sourceObject.getValue();
         	
         	 if(!destinyMap.containsKey(sourceObjectClass.getColumnName()))continue;
-        	 System.out.println("Find key:"+sourceObjectClass.getColumnName());
-             //Object valueGetBySource = new ReflectionObjectInvoke(sourceObjectClass.getMethodGet()).invoke(instance.getObjectSource());
         	 Object valueGetBySource = new ReflectionObjectInvoke(sourceObjectClass.getMethodGet()).invoke(sourceObjectClass.getReference());
              ObjectClassMap destinMapObject = destinyMap.get(sourceObjectClass.getColumnName());
-             System.out.println(sourceObjectClass.getColumnName()+"> Hand:"+destinMapObject.toString());
-        	 Method methodSetDestiny = MapperValidation.failIfNull(destinMapObject).getMethodSet();
+             Method methodSetDestiny = MapperValidation.failIfNull(destinMapObject).getMethodSet();
+             
              valueGetBySource = ConvertMapperValues.tryToConvert(valueGetBySource,methodSetDestiny.getParameterTypes(),method);
+             
              new ReflectionObjectInvoke(methodSetDestiny).invoke(destinMapObject.getReference(),valueGetBySource);
-             System.out.println("END ....................");
+             
         }
-		 
 		 
 	       return instance.getObjectDestiny();
 	    }

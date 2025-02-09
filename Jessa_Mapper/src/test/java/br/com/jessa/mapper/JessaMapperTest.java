@@ -8,6 +8,7 @@ import org.junit.Test;
 import br.com.jessa.mapper.env.A;
 import br.com.jessa.mapper.env.B;
 import br.com.jessa.mapper.env.C;
+import br.com.jessa.mapper.env.E;
 import br.com.jessa.mapper.env.MapperObjectTestDestiny;
 import br.com.jessa.mapper.env.MapperObjectTestSource;
 import br.com.jessa.mapper.env.MapperSubObjectTest;
@@ -60,11 +61,11 @@ public class JessaMapperTest {
     @Test
     public void testMapperFromEnumObject(){
         MapperObjectTestDestiny sourceTest = new MapperObjectTestDestiny();
-        sourceTest.setType(MapperObjectTestDestiny.typePerson.GOBLIN);
+        sourceTest.setTypins(MapperObjectTestDestiny.typePerson.GOBLIN);
         MapperObjectTestSource destinyTest;
         destinyTest= JessaMapper.implement(MapperTestInterface.class).toTestEnumSourceMapToDestiny(sourceTest);
         assertNotNull(destinyTest);
-        assertEquals(sourceTest.getType().toString(),destinyTest.getType());
+        assertEquals(sourceTest.getTypins().toString(),destinyTest.getType());
     }
  
  
@@ -76,7 +77,7 @@ public class JessaMapperTest {
         destinyTest= JessaMapper.implement(MapperTestInterface.class).toTestToEnumSourceMapToDestiny(sourceTest);
         
         assertNotNull(destinyTest);
-        assertEquals(sourceTest.getType(),destinyTest.getType().toString());
+        assertEquals(sourceTest.getType(),destinyTest.getTypins().toString());
     }
 
     @Test
@@ -134,5 +135,48 @@ public class JessaMapperTest {
         assertEquals(b.getA().getName(),c.getCname());
         assertEquals(a.getName(), subName);
         assertEquals(b.getA().getName(), subName);
+    }
+    
+    @Test
+    public void testMapperObjectSubClass4(){
+    	String subName="Teste sub";
+    
+    	A a = new A();
+        B b = new B();
+        C c = new C();
+        E e = new E();
+        a.setName(subName);
+        b.setA(a);
+        c.setCname(subName);
+        System.out.println("ORigem>>>>>>"+c);
+        e= JessaMapper.implement(MapperTestInterface.class).toTestSubClass4(c);
+        
+        System.out.println("Destiny>>"+e);
+        
+        assertEquals(e.getB().getA().getName(),c.getCname());
+        assertEquals(a.getName(), subName);
+        assertEquals(e.getB().getA().getName(), subName);
+    }
+    @Test
+    public void testMapperObjectSubClass5(){
+    	String subName="Teste sub";
+    
+    	A a = new A();
+        B b = new B();
+        C c = new C();
+        E e = new E();
+        a.setName(subName);
+        b.setA(a);
+        c.setCname(subName);
+        e.setB(b);
+        
+        System.out.println("ORigem>>>>>>"+e);
+        c= JessaMapper.implement(MapperTestInterface.class).toTestSubClass5(e);
+        
+        System.out.println("Destiny>>"+c);
+        
+        assertEquals(e.getB().getA().getName(),c.getCname());
+        assertEquals(a.getName(), subName);
+        assertEquals(subName,e.getB().getA().getName());
     }
 }

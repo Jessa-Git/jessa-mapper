@@ -25,7 +25,6 @@ public class ReflectionObjectInvoke {
     public void invoke(Object instance,Object ex)  {
         try {
             if(ex !=null)MapperValidation.invokeSetWithParameter(method,ex);
-            System.out.println("Invoke:"+instance.getClass().getSimpleName()+"."+method.getName()+"("+ex+")");
             method.invoke(instance,ex);
         }catch (Exception e){
             JessaMapperException.invokeError(e,"Falha no reflection ao chamar SET para:",instance,method);

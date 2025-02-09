@@ -10,7 +10,6 @@ public class MapperSubObjectTest {
 	}
 
 	public void setSubName(String subName) {
-		System.out.println(toString());
 		this.subName = subName;
 	}
 

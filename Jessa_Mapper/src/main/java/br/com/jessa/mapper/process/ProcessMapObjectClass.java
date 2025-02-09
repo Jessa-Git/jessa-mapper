@@ -13,53 +13,64 @@ import br.com.jessa.mapper.reflection.ReflectionObjectInstance;
 
 public class ProcessMapObjectClass {
 	
-	public static Map<String ,ObjectClassMap > generateMapObjectClass(Object m){
-		System.out.println(">>"+m.getClass().getSimpleName());
-			return generateMapObjectClass(m,null);
+	public static Map<String ,ObjectClassMap > generateMapObjectClass(Object m,Boolean isSource){
+		return generateMapObjectClass(m,null,isSource);
 	}
 	
-	private static Map<String ,ObjectClassMap > generateMapObjectClass(Object j,String superName){
-
+	private static Map<String ,ObjectClassMap > generateMapObjectClass(Object j,String superName,Boolean isSource){
+		if(j == null)return null;
 		Class<?> m = j.getClass();
-		System.out.println("-ProcessMapObjectClass ["+m.getSimpleName()+"]"+m.isPrimitive());
-        Method[] methods = m.getDeclaredMethods();
+		Method[] methods = m.getDeclaredMethods();
         Field[] fields = m.getDeclaredFields();
         Map<String ,ObjectClassMap > mapObjectInClass = new HashMap<>();
-        processAllFieldInClass(methods, fields,superName, mapObjectInClass,j);
+        processAllFieldInClass(methods, fields,superName, mapObjectInClass,j,isSource);
         return mapObjectInClass;
     }
 	
-	private static void processAllFieldInClass(Method[] methods, Field[] fields,String superName, Map<String, ObjectClassMap> mapObjectInClass,Object reference) {
-        System.out.println("REF >>"+reference);
-		for (Field field : fields) {
+	private static void processAllFieldInClass(Method[] methods, Field[] fields,String superName, Map<String, ObjectClassMap> mapObjectInClass,Object reference,Boolean isSource) {
+        for (Field field : fields) {
 			int u = 0;
         	ObjectClassMap cls = new ObjectClassMap();
             cls.setField(field);
             cls.setReference(reference);
-//            System.out.println(">>ProcessMapObjectClass ["+field.getName()+"]"
-//            		+field.getType().getSimpleName()
-//            		+".."+DetectClass.isPrimitive(field.getType()));
             
             processMethodGetSetToField(methods, field.getName(), cls);
             
             mapObjectInClass.put(naming(superName,cls.getFieldName()),cls);
             if(!DetectClass.isPrimitive(field.getType())) {
-	            System.out.println("*** Sub process to["+u+"]:"+naming(superName,cls.getFieldName()));
 	            JessaMapperException.protectStackOverFlowByClass(reference.getClass(),field);
-	            Object suRef=ReflectionObjectInstance.byClasss(field.getType());
-	            System.out.println("REF:"+suRef.toString());
-	            Map<String ,ObjectClassMap > o=generateMapObjectClass(suRef,naming(superName,cls.getFieldName()));
-	            setNewObject(cls, reference, suRef);
+	            Object suRef = null;
+	            if(isSource) {
+	            	suRef=getNewObject(cls, reference);
+	            	
+	            }else {
+	            	suRef=ReflectionObjectInstance.byClasss(field.getType());
+	            	setNewObject(cls, reference, suRef);
+	            	
+	            }
+	            Map<String ,ObjectClassMap > o=generateMapObjectClass(suRef,naming(superName,cls.getFieldName()),isSource);
 	            if(o!=null)mapObjectInClass.putAll(o);
-            }else {
-            	System.out.println("*** process to["+u+"]:"+naming(superName,cls.getFieldName()));
+	            
+	            
             }
         }
     }
-	
+	private static Object getNewObject(ObjectClassMap cls,Object reference) {
+		Object suRef= null;
+		try {
+    		suRef=cls.getMethodGet().invoke(reference);
+    		setNewObject(cls, reference, suRef);
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return suRef;
+	}
 	private static void setNewObject(ObjectClassMap cls,Object reference, Object suRef ) {
 		try {
-			System.out.println("Mak vinc>>>"+cls.getFieldName()+"."+cls.getMethodSet().getName());
 			cls.getMethodSet().invoke(reference, suRef);
 		} catch (IllegalAccessException e) {
 			// TODO Auto-generated catch block
