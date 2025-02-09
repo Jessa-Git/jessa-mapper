@@ -2,10 +2,13 @@ package br.com.jessa.mapper.reflection;
 
 import java.lang.reflect.Method;
 
+import br.com.jessa.mapper.exception.ExceptionsMessages;
 import br.com.jessa.mapper.exception.JessaMapperException;
 
 public class ReflectionObjectInstance {
-	
+	ReflectionObjectInstance() {
+		throw new JessaMapperException(ExceptionsMessages.PRIVATE_CONSTRUCTOR.getMessage());
+	}
 	public static Object byMethod(Method method){
         Object objectToReturn = null;
         try{
@@ -21,7 +24,7 @@ public class ReflectionObjectInstance {
         return objectToReturn;
     }
 	
-	public static Object byClasss(Class classToInstance){
+	public static Object byClasss(Class<?> classToInstance){
         try{
                 return  classToInstance.getConstructor().newInstance();
         }catch (Exception e){

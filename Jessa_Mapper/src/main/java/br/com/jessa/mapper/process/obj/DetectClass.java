@@ -1,10 +1,8 @@
 package br.com.jessa.mapper.process.obj;
 
-import java.lang.reflect.Type;
-
 public class DetectClass {
 
-	public static Boolean isPrimitive(Class val) {
+	public static Boolean isPrimitive(Class<?> val) {
 		Boolean test;
 		DetectClass d = new DetectClass();
 		test= Boolean.logicalOr(d.detectString(val), d.detectInteger(val));
@@ -14,19 +12,19 @@ public class DetectClass {
 		test= Boolean.logicalOr(test, d.detectEnum(val));
 		return test;		
 	}
-	private Boolean detectString(Class val) {
+	private Boolean detectString(Class<?> val) {
 		return val.equals(String.class);
 	}
-	private Boolean detectInteger(Class val) {
+	private Boolean detectInteger(Class<?> val) {
 		return val.equals(Integer.class);
 	}
-	private Boolean detectDouble(Class val) {
+	private Boolean detectDouble(Class<?> val) {
 		return val.equals(Double.class);
 	}
-	private Boolean detectLong(Class val) {
+	private Boolean detectLong(Class<?> val) {
 		return val.equals(Long.class);
 	}
-	private Boolean detectEnum(Class val) {
+	private Boolean detectEnum(Class<?> val) {
 		return val.isEnum();
 	}
 	

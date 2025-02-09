@@ -144,7 +144,7 @@ public class JessaMapperTest {
     	A a = new A();
         B b = new B();
         C c = new C();
-        E e = new E();
+        E e;
         a.setName(subName);
         b.setA(a);
         c.setCname(subName);

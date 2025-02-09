@@ -7,7 +7,7 @@ import br.com.jessa.mapper.exception.JessaMapperException;
 
 public class MapperValidation {
 	MapperValidation() {
-		throw new JessaMapperException(ExceptionsMessages.privateConstructor.getMessage());
+		throw new JessaMapperException(ExceptionsMessages.PRIVATE_CONSTRUCTOR.getMessage());
 	}
 
 	public static <T extends Object> T failIfNull(T b) {
@@ -20,8 +20,8 @@ public class MapperValidation {
 		JessaMapperException.isNull(method.getParameterTypes());
 		JessaMapperException.methodWithMoreParameterThanOne("Metodo Set com mais de 1 parametro",method.getParameterTypes());
 		Class<?> parameterTypes = method.getParameterTypes()[0];
-//		if (!parameterTypes.equals(classObjectParameter))
-//			throw new JessaMapperException("Classe diferente entre Destino[" + method.getName() + "."
-//					+ parameterTypes.getName() + "] e Source[" + classObjectParameter.getName() + "]---");
+		if (!parameterTypes.equals(classObjectParameter))
+			throw new JessaMapperException("Classe diferente entre Destino[" + method.getName() + "."
+					+ parameterTypes.getName() + "] e Source[" + classObjectParameter.getName() + "]---");
 	}
 }

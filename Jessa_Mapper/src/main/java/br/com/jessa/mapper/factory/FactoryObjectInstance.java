@@ -1,8 +1,13 @@
-package br.com.jessa.mapper.process;
+package br.com.jessa.mapper.factory;
 
+import br.com.jessa.mapper.process.ProcessMapObjectClass;
 import br.com.jessa.mapper.process.obj.ObjectProcessInstance;
 
 public class FactoryObjectInstance {
+	
+	public static FactoryObjectInstance instance() {
+		return new FactoryObjectInstance();
+	}
 	public ObjectProcessInstance create(Object sourcer, Object destiny) {
 		ObjectProcessInstance instance = new ObjectProcessInstance();
 

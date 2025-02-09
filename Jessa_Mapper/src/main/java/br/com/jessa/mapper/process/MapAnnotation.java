@@ -7,9 +7,9 @@ import br.com.jessa.mapper.annotations.CaseMap;
 import br.com.jessa.mapper.annotations.Mapper;
 import br.com.jessa.mapper.process.obj.ObjectProcessInstance;
 
-public class ProcessAnnotationMap {
+public class MapAnnotation {
 
-	public void s(Method method,ObjectProcessInstance instance) {
+	public void process(ObjectProcessInstance instance,Method method ){
 		Mapper mapperInterface = method.getAnnotation(Mapper.class);
 		if (mapperInterface == null)
 			return;

@@ -13,6 +13,11 @@ public class MapperSubObjectTest {
 		this.subName = subName;
 	}
 
+	@Override
+	public String toString() {
+		return "MapperSubObjectTest [subName=" + subName + "]";
+	}
+
 	
 	
 	

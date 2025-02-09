@@ -6,15 +6,16 @@ import br.com.jessa.mapper.exception.JessaMapperException;
 public class ConvertEnum {
 	
 	ConvertEnum() {
-		throw new JessaMapperException(ExceptionsMessages.privateConstructor.getMessage());
+		throw new JessaMapperException(ExceptionsMessages.PRIVATE_CONSTRUCTOR.getMessage());
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public static HowToConvert toEnum(Object e,Class enumClass) {
 		return new HowToConvert(e) {
 			
+			@SuppressWarnings({ "unchecked" })
 			@Override
 			public Enum newValue(Object valueToConvert) {
-				System.out.println("Enum "+enumClass.getConstructors().length);
 				return Enum.valueOf(enumClass, valueToConvert.toString());
 			}
 		};

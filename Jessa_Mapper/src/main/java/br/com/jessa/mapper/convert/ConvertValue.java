@@ -5,7 +5,7 @@ import br.com.jessa.mapper.exception.JessaMapperException;
 
 public class ConvertValue {
 	ConvertValue() {
-		throw new JessaMapperException(ExceptionsMessages.privateConstructor.getMessage());
+		throw new JessaMapperException(ExceptionsMessages.PRIVATE_CONSTRUCTOR.getMessage());
 	}
 	 @SuppressWarnings("unchecked")
 		public static HowToConvert toInt(Object b){

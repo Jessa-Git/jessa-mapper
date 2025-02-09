@@ -6,7 +6,7 @@ import br.com.jessa.mapper.MapperSubProcess;
 
 public class ConvertToClass<T> extends ConvertModel<T> {
 
-	public static HowToConvert reMap(Object sourceElement, Class aClass,Method mapperMethod) {
+	public static HowToConvert reMap(Object sourceElement, Class<?> aClass,Method mapperMethod) {
 		return new HowToConvert(sourceElement) {
 			
 			@SuppressWarnings("unchecked")

@@ -49,7 +49,7 @@ public class JessaMapperException extends RuntimeException {
     }
 
 	public static void privateConstructor() {
-		throw new JessaMapperException(ExceptionsMessages.privateConstructor.getMessage());
+		throw new JessaMapperException(ExceptionsMessages.PRIVATE_CONSTRUCTOR.getMessage());
 		
 	}
 

@@ -8,7 +8,7 @@ import br.com.jessa.mapper.exception.JessaMapperException;
 public class ConvertMapperValues {
 	
 	ConvertMapperValues(){
-		throw new JessaMapperException(ExceptionsMessages.privateConstructor.getMessage());
+		throw new JessaMapperException(ExceptionsMessages.PRIVATE_CONSTRUCTOR.getMessage());
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -30,10 +30,9 @@ public class ConvertMapperValues {
     	if(y == null) {
     		y= ConvertToClass
     				.reMap(sourceElement,aClass, mapperMethod)
-                    .getValue()
+    				.newValue(sourceElement)
                     ;
     	}
-    	
     	JessaMapperException.isNull(y);
     	return y;
     }

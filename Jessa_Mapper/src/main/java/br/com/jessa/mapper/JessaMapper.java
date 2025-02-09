@@ -14,9 +14,7 @@ public class JessaMapper {
 				interfaceMapper.getClassLoader(), 
 				new Class[] { interfaceMapper },
 				new MapperHandler());
-		
 		JessaMapperException.isNull(mapGeneric);
-
 		return (T) mapGeneric;
 	}
 }

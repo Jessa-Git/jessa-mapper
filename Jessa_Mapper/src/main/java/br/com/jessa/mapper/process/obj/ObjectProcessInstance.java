@@ -2,8 +2,6 @@ package br.com.jessa.mapper.process.obj;
 
 import java.util.Map;
 
-import br.com.jessa.mapper.exception.JessaMapperException;
-
 public class ObjectProcessInstance {
     private Object objectDestiny;
 

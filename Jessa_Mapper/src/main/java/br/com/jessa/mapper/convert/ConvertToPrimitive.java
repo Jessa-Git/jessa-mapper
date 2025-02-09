@@ -19,6 +19,7 @@ public class ConvertToPrimitive<T> extends ConvertModel<T> {
 
 	public ConvertToPrimitive<T> tryTo(HowToConvert d) {
 	
+		obj(d);
 		if (hasConvertValue)
 			return this;
 		if (!isEnumConvert(d) && !isReturnClassEqualsDestinyClass(d)) {

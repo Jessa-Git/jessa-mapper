@@ -6,10 +6,12 @@ public abstract class HowToConvert {
 	 
 
 		private Object value;
-		public HowToConvert(Object b) {
+		
+		protected HowToConvert(Object b) {
 			JessaMapperException.isNull(b);
 			value = b;
 		}
+		
 		public Object getValue() {
 			return value;
 		}
