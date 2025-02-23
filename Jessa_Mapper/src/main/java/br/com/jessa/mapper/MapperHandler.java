@@ -4,10 +4,6 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
 import br.com.jessa.mapper.exception.JessaMapperException;
-import br.com.jessa.mapper.factory.FactoryObjectInstance;
-import br.com.jessa.mapper.process.MapAnnotation;
-import br.com.jessa.mapper.process.MapGettingSourceToSetDestiny;
-import br.com.jessa.mapper.process.obj.ObjectProcessInstance;
 import br.com.jessa.mapper.reflection.ReflectionObjectInstance;
 
 public class MapperHandler implements InvocationHandler {
@@ -15,14 +11,10 @@ public class MapperHandler implements InvocationHandler {
 	@Override
 	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 
-		ObjectProcessInstance instance = FactoryObjectInstance.instance()
-				.create(getObjectSource(args),getObjectDestiny(method, args));
-
-		new MapAnnotation().process(instance, method);
-
-		new MapGettingSourceToSetDestiny().process(instance, method);
-
-		return instance.getObjectDestiny();
+		Object source = getObjectSource(args);
+		Object destiny = getObjectDestiny(method, args);
+		
+		return MapperAction.process(source, destiny, method);
 	}
 
 	private Object getObjectSource(Object[] args) {

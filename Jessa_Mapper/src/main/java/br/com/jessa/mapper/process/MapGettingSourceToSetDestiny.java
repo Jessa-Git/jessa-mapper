@@ -4,7 +4,8 @@ import java.lang.reflect.Method;
 import java.util.Map;
 
 import br.com.jessa.mapper.MapperValidation;
-import br.com.jessa.mapper.convert.ConvertMapperValues;
+import br.com.jessa.mapper.convert.DtoConvert;
+import br.com.jessa.mapper.convert.n.JessaConvert;
 import br.com.jessa.mapper.process.obj.ObjectClassMap;
 import br.com.jessa.mapper.process.obj.ObjectProcessInstance;
 import br.com.jessa.mapper.reflection.ReflectionObjectInvoke;
@@ -39,8 +40,28 @@ public class MapGettingSourceToSetDestiny {
 	private Object getValueFromSourceAndConvert(Method method, ObjectClassMap sourceMapClass, Method methodSetDestiny) {
 		Object valueGetBySource = new ReflectionObjectInvoke(sourceMapClass.getMethodGet())
 				.invoke(sourceMapClass.getReference());
-		return ConvertMapperValues.tryToConvert(valueGetBySource, methodSetDestiny, method,
-				sourceMapClass.getMethodGet());
+
+		if (valueGetBySource != null) {
+			JessaConvert convert = new JessaConvert(prepareDto(method, sourceMapClass, methodSetDestiny, valueGetBySource));
+			convert
+			.byPrimitiveValue()
+			.byClassObject()
+			.byEnumObject();
+
+			return convert.val();
+		}
+		return null;
+	}
+
+	private DtoConvert prepareDto(Method method, ObjectClassMap sourceMapClass, Method methodSetDestiny,
+			Object valueGetBySource) {
+		DtoConvert dto = new DtoConvert();
+		dto.setMethodGetSource(sourceMapClass.getMethodGet());
+		dto.setMethodSetDestiny(methodSetDestiny);
+		dto.setMapperMethod(method);
+		dto.setReturnValueClassDestiny(methodSetDestiny.getParameterTypes()[0]);
+		dto.setSourceObject(valueGetBySource);
+		return dto;
 	}
 
 }

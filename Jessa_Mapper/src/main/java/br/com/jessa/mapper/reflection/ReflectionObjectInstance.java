@@ -28,7 +28,7 @@ public class ReflectionObjectInstance {
         try{
                 return  classToInstance.getConstructor().newInstance();
         }catch (Exception e){
-            JessaMapperException.out(e,"Erro ao gerar instancia para Classe.");
+            JessaMapperException.out(e,"Erro ao gerar instancia para Classe["+classToInstance.getSimpleName()+"].");
         }
 
         throw new JessaMapperException("Falha ao gerar Objeto por class:"+classToInstance.getSimpleName());

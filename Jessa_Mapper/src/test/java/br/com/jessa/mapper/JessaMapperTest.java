@@ -18,6 +18,14 @@ import br.com.jessa.mapper.exception.JessaMapperException;
 public class JessaMapperTest {
 
 	
+	@Test(expected = JessaMapperException.class)
+    public void testMapperNullObject(){
+
+        MapperObjectTestSource sourceTest = null;
+        MapperObjectTestDestiny destinyTest;
+        destinyTest= JessaMapper.implement(MapperTestInterface.class).toTestStringSourceMapToDestiny(sourceTest);
+        assertNotNull(destinyTest);
+    }
 	@Test
     public void testMapperStringObject(){
 
@@ -77,6 +85,7 @@ public class JessaMapperTest {
         destinyTest= JessaMapper.implement(MapperTestInterface.class).toTestToEnumSourceMapToDestiny(sourceTest);
         
         assertNotNull(destinyTest);
+        assertNotNull(destinyTest.getTypins());
         assertEquals(sourceTest.getType(),destinyTest.getTypins().toString());
     }
 

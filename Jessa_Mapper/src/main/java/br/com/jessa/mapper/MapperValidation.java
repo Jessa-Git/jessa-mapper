@@ -20,7 +20,8 @@ public class MapperValidation {
 		JessaMapperException.isNull(method.getParameterTypes());
 		JessaMapperException.methodWithMoreParameterThanOne("Metodo Set com mais de 1 parametro",method.getParameterTypes());
 		Class<?> parameterTypes = method.getParameterTypes()[0];
-		if (!parameterTypes.equals(classObjectParameter))
+		if (!parameterTypes.equals(classObjectParameter) && !parameterTypes.isPrimitive()
+				)
 			throw new JessaMapperException("Classe diferente entre Destino[" + method.getName() + "."
 					+ parameterTypes.getName() + "] e Source[" + classObjectParameter.getName() + "]---");
 	}

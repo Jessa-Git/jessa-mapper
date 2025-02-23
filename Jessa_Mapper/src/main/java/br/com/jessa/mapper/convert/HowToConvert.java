@@ -7,8 +7,9 @@ public abstract class HowToConvert {
 
 		private Object value;
 		
-		protected HowToConvert(Object b) {
+		protected HowToConvert(Object b) {			
 			JessaMapperException.isNull(b);
+			System.out.println("Class How:"+b.getClass().getSimpleName());
 			value = b;
 		}
 		
@@ -18,5 +19,12 @@ public abstract class HowToConvert {
 		
 
 		public abstract <T> T newValue(Object valueToConvert);
+
+		@Override
+		public String toString() {
+			return "HowToConvert [value=" + value + "]";
+		}
+		
+		
 
 }

@@ -10,6 +10,7 @@ public class DetectClass {
 		test= Boolean.logicalOr(test, d.detectDouble(val));
 		test= Boolean.logicalOr(test, d.detectLong(val));
 		test= Boolean.logicalOr(test, d.detectEnum(val));
+		test= Boolean.logicalOr(test, val.isPrimitive());
 		return test;		
 	}
 	private Boolean detectString(Class<?> val) {
