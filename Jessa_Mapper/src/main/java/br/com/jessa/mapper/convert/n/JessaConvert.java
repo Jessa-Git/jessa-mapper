@@ -21,7 +21,8 @@ public class JessaConvert {
 			val = toString(val);
 			val = toDouble(val);
 		} catch (Exception e) {
-			throw new JessaMapperException("Falha ao converter ["+dto.getSourceObject()+"] para "+dto.getReturnValueClassDestiny().getSimpleName());
+			throw new JessaMapperException("Falha ao converter [" + dto.getSourceObject() + "] para "
+					+ dto.getReturnValueClassDestiny().getSimpleName());
 		}
 		return this;
 	}
@@ -33,11 +34,12 @@ public class JessaConvert {
 		return this;
 	}
 
-	@SuppressWarnings("unchecked")
 	public JessaConvert byEnumObject() {
-		if (dto.getReturnValueClassDestiny().isEnum())
-			val = Enum.valueOf(dto.getReturnValueClassDestiny(), dto.getSourceObject().toString());
+		if (!dto.getReturnValueClassDestiny().isEnum())
+			return this;
+		val = new ConvertEnum().process(dto).getVal();
 		return this;
+
 	}
 
 	public Object val() {

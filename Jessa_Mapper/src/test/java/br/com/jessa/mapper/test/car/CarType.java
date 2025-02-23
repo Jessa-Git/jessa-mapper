@@ -1,7 +1,7 @@
 package br.com.jessa.mapper.test.car;
 
 public enum CarType {
-	CAR(1,"b"),SEDAN(2,"c");
+	CARI(1,"b"),SEDAN(2,"c"),FUSCA(3,"d");
 	
 	private Integer n;
 	private String c;

@@ -23,7 +23,18 @@ public class CarTest {
         assertEquals(carDto.getSeatCount(), 5);
         assertEquals(carDto.getType(), "SEDAN");
     }
-	
+	@Test
+    public void testMapperStringObject22(){
+		Car car = new Car();
+		CarDto carDto = new CarDto();
+		carDto.setMake("Morris");
+		carDto.setSeatCount(5);
+		carDto.setType(CarType.SEDAN.getC());
+		
+		//CarDto carDto= JessaMapper.implement(CarMapper.class).toTestStringSourceMapToDestiny(car);
+		car= CarMapper.INSTANCE.toTestStringSourceMapToDestiny2(carDto);
+		
+	}
 	@Test
     public void testMapperStringObject2(){
 
@@ -35,7 +46,7 @@ public class CarTest {
 		CarDto carDto = new CarDto();
 		carDto.setMake("Morris");
 		carDto.setSeatCount(5);
-		carDto.setType(CarType.SEDAN.toString());
+		carDto.setType(CarType.SEDAN.getC());
 		
 		//CarDto carDto= JessaMapper.implement(CarMapper.class).toTestStringSourceMapToDestiny(car);
 		car= CarMapper.INSTANCE.toTestStringSourceMapToDestiny2(carDto);

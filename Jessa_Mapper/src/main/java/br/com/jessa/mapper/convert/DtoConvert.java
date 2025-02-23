@@ -16,7 +16,7 @@ public class DtoConvert {
 	public void setSourceObject(Object sourceObject) {
 		this.sourceObject = sourceObject;
 	}
-	public Class getReturnValueClassDestiny() {
+	public Class<?> getReturnValueClassDestiny() {
 		return returnValueClassDestiny;
 	}
 	public void setReturnValueClassDestiny(Class<?> returnValueClassDestiny) {
