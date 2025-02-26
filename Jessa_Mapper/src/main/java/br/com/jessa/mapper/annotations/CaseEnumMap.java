@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface Mapper {
-    CaseMap[] mapping() default  {};
-    CaseEnumMap[] mapEnum() default {};
+public @interface CaseEnumMap {
+	String fieldNameClass();
+	String parameterNameEnum();
 }

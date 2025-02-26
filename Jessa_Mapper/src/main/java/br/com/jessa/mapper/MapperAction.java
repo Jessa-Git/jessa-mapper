@@ -13,7 +13,9 @@ public class MapperAction {
 		
 		ObjectProcessInstance instance = FactoryObjectInstance.instance().create(source, destiny);
 
+		new MapAnnotation().processEnum(instance, method);
 		new MapAnnotation().process(instance, method);
+		
 
 		new MapGettingSourceToSetDestiny().process(instance, method);
 

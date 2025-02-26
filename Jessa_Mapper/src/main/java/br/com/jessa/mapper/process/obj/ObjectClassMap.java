@@ -10,6 +10,7 @@ public class ObjectClassMap {
 	private Method methodSet;
 	private Field field;
 	private Object reference;
+	private String enumMethod;
 
 	public Method getMethodGet() {
 		return methodGet;
@@ -48,7 +49,13 @@ public class ObjectClassMap {
 		this.field = field;
 	}
 
+	public String getEnumMethod() {
+		return enumMethod;
+	}
 
+	public void setEnumMethod(String enumMethod) {
+		this.enumMethod = enumMethod;
+	}
 
 	public Object getReference() {
 		return reference;

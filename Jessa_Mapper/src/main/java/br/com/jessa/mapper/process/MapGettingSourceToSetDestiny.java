@@ -46,7 +46,8 @@ public class MapGettingSourceToSetDestiny {
 			convert
 			.byPrimitiveValue()
 			.byClassObject()
-			.byEnumObject();
+			.byEnumObject()
+			.byEnumSource();
 
 			return convert.val();
 		}
@@ -61,6 +62,7 @@ public class MapGettingSourceToSetDestiny {
 		dto.setMapperMethod(method);
 		dto.setReturnValueClassDestiny(methodSetDestiny.getParameterTypes()[0]);
 		dto.setSourceObject(valueGetBySource);
+		dto.setEnumMethodName(sourceMapClass.getEnumMethod());
 		return dto;
 	}
 

@@ -10,6 +10,7 @@ public class DtoConvert {
 	Method mapperMethod;
 	Method methodSetDestiny;
 	Method methodGetSource;
+	String enumMethodName;
 	public Object getSourceObject() {
 		return sourceObject;
 	}
@@ -42,6 +43,13 @@ public class DtoConvert {
 	}
 
 	
+	public void setEnumMethodName(String enumMethodName) {
+		if(enumMethodName !=null) System.out.println("DTOsetEnumMethodName>"+enumMethodName);
+		this.enumMethodName = enumMethodName;
+	}
+	public String getEnumMethodName() {
+		return enumMethodName;
+	}
 	public String getClassSource() {
 		return sourceObject.getClass().getSimpleName();
 	}

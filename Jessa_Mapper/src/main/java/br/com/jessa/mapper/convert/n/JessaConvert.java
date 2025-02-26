@@ -42,6 +42,15 @@ public class JessaConvert {
 
 	}
 
+	public JessaConvert byEnumSource() {
+
+		if (dto.getEnumMethodName() != null)
+			val = new ConvertEnum().processSource(dto).getVal();
+
+		return this;
+
+	}
+
 	public Object val() {
 		return val;
 	}
