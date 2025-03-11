@@ -15,13 +15,12 @@ public class CarTest {
 		car.setNumberOfSeats(5);
 		car.setType(CarType.SEDAN);
 		
-		//CarDto carDto= JessaMapper.implement(CarMapper.class).toTestStringSourceMapToDestiny(car);
 		CarDto carDto= CarMapper.INSTANCE.toTestStringSourceMapToDestiny(car);
         
 		assertNotNull(carDto);
-        assertEquals(carDto.getMake(), "Morris");
-        assertEquals(carDto.getSeatCount(), 5);
-        assertEquals(carDto.getType(), "SEDAN");
+        assertEquals("Morris",carDto.getMake() );
+        assertEquals( 5,carDto.getSeatCount());
+        assertEquals("SEDAN",carDto.getType());
     }
 	
 	@Test
@@ -37,13 +36,13 @@ public class CarTest {
 		carDto.setSeatCount(5);
 		carDto.setType(CarType.SEDAN.getC());
 		
-		//CarDto carDto= JessaMapper.implement(CarMapper.class).toTestStringSourceMapToDestiny(car);
 		car= CarMapper.INSTANCE.toTestStringSourceMapToDestiny2(carDto);
         
 		assertNotNull(car);
-        assertEquals(car.getMake(), "Morris");
-        assertEquals(car.getNumberOfSeats(), 5);
-        assertEquals(car.getType(), CarType.SEDAN);
+        assertEquals("Morris",car.getMake());
+        assertEquals(5,car.getNumberOfSeats());
+        assertEquals(CarType.SEDAN,car.getType());
+        
     }
 	
 	@Test
@@ -59,21 +58,20 @@ public class CarTest {
 		carDto.setSeatCount(5);
 		carDto.setType(CarType.SEDAN.getC());
 		
-		//CarDto carDto= JessaMapper.implement(CarMapper.class).toTestStringSourceMapToDestiny(car);
 		car= CarMapper.INSTANCE.toTestStringSourceMapToDestiny2(carDto);
         
 		assertNotNull(car);
-        assertEquals(car.getMake(), "Morris");
-        assertEquals(car.getNumberOfSeats(), 5);
-        assertEquals(car.getType(), CarType.SEDAN);
+        assertEquals("Morris",car.getMake());
+        assertEquals(5,car.getNumberOfSeats());
+        assertEquals(CarType.SEDAN,car.getType());
         
         
         carDto= CarMapper.INSTANCE.toTestStringSourceMapToDestinyEnum(car);
         
         assertNotNull(carDto);
-        assertEquals(carDto.getMake(), "Morris");
-        assertEquals(carDto.getSeatCount(), 5);
-        assertEquals(carDto.getType(), "c");
+        assertEquals("Morris",carDto.getMake());
+        assertEquals(5,carDto.getSeatCount());
+        assertEquals("c2",carDto.getType());
     }
 	
 }

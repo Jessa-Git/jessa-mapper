@@ -22,18 +22,18 @@ public class ConvertModel<T> {
 		}
 		return b;
 	}
-	@SuppressWarnings({ "unchecked", "hiding" })
-	protected  <T> T obj(HowToConvert h) {
-		T b = null;
-		try {
-
-			b = (T) h.getValue();
-
-		} catch (Exception e) {
-			throw new JessaMapperException("Falha ao tentar converter valor:["+methodSetDestiny.getName()+"] espera ("+ methodSetDestiny.getParameters()[0].getType().getSimpleName()+ ") mas recebeu |"+ h.getValue()+"|");
-		}
-		return b;
-	}
+	/*
+	 * @SuppressWarnings({ "unchecked", "hiding" }) protected <T> T obj(HowToConvert
+	 * h) { T b = null; try {
+	 * 
+	 * b = (T) h.getValue();
+	 * 
+	 * } catch (Exception e) { throw new
+	 * JessaMapperException("Falha ao tentar converter valor:["+methodSetDestiny.
+	 * getName()+"] espera ("+
+	 * methodSetDestiny.getParameters()[0].getType().getSimpleName()+
+	 * ") mas recebeu |"+ h.getValue()+"|"); } return b; }
+	 */
 	
 	protected void setValue(T newValue) {
 		value = newValue;

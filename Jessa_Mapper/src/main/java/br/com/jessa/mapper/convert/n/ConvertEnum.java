@@ -16,20 +16,20 @@ public class ConvertEnum {
 		Object toReturn = null;
 
 		for (Object enumSingleObject : getEnumObjects(dto.getReturnValueClassDestiny())) {
-
-			if (enumSingleObject.toString().equals(dto.getSourceObject().toString())) {
-				toReturn = enumSingleObject;
-				break;
-			}
-
-			toReturn = processsEnumMethodsDestiny(enumSingleObject);
-			if (toReturn != null)
+			if ((toReturn = verifyEnumObjectOrEnumValue(enumSingleObject)) != null)
 				break;
 		}
 		if (toReturn != null)
 			val = toReturn;
 
 		return this;
+	}
+
+	private Object verifyEnumObjectOrEnumValue(Object enumSingleObject) {
+		if (enumSingleObject.toString().equals(dto.getSourceObject().toString())) {
+			return enumSingleObject;
+		}
+		return processsEnumMethodsDestiny(enumSingleObject);
 	}
 
 	public ConvertEnum processSource(DtoConvert dto) {
