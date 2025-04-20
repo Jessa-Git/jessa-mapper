@@ -71,7 +71,7 @@ public class JessaConvert {
 		return val;
 	}
 
-	private Object toDouble(Object val2) {
+	private Object toDouble(Object val) {
 		if (getClassReturnNewValue().equals("double")
 				|| getClassReturnNewValue().equals(Double.class.getSimpleName())) {
 			isPrimitive = true;

@@ -35,7 +35,7 @@ public class ReflectionObjectInstance {
 		} catch (Exception e) {
 			JessaMapperException.out(e, "Erro ao gerar instancia para metodo.");
 		}
-
+		JessaMapperException.isNull(objectToReturn);
 		return objectToReturn;
 	}
 

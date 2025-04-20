@@ -2,17 +2,16 @@ package br.com.jessa.mapper;
 
 import java.lang.reflect.Method;
 
-import br.com.jessa.mapper.exception.ExceptionsMessages;
-import br.com.jessa.mapper.exception.JessaMapperException;
 import br.com.jessa.mapper.factory.FactoryObjectInstance;
 import br.com.jessa.mapper.process.MapAnnotation;
 import br.com.jessa.mapper.process.MapGettingSourceToSetDestiny;
 import br.com.jessa.mapper.process.obj.ObjectProcessInstance;
 
 public class MapperAction {
-	private MapperAction() {
-		throw new JessaMapperException(ExceptionsMessages.PRIVATE_CONSTRUCTOR.getMessage());
-	}
+	/*
+	 * private MapperAction() { throw new
+	 * JessaMapperException(ExceptionsMessages.PRIVATE_CONSTRUCTOR.getMessage()); }
+	 */
 
 	public static Object process(Object source, Object destiny, Method method) {
 

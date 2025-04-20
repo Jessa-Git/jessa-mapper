@@ -8,7 +8,7 @@ public class JessaMapper {
 	private  JessaMapper() {}
 
 	@SuppressWarnings("unchecked")
-	public static <T extends ToInterfaceMapper> T implement(Class<T> interfaceMapper) {
+	public static synchronized <T extends ToInterfaceMapper> T implement(Class<T> interfaceMapper) {
 		Object mapGeneric = null;
 		mapGeneric = Proxy.newProxyInstance(
 				interfaceMapper.getClassLoader(), 
