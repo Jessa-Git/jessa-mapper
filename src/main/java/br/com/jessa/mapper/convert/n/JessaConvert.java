@@ -64,7 +64,7 @@ public class JessaConvert {
 	}
 
 	private Object toInt(Object val) {
-		if (getClassReturnNewValue().equals("int") || getClassReturnNewValue().equals(Integer.class.getSimpleName())) {
+		if (newValueClassEquals("int") || newValueClassEquals(Integer.class.getSimpleName())) {
 			isPrimitive = true;
 			return Integer.valueOf("" + dto.getSourceObject());
 		}
@@ -72,16 +72,19 @@ public class JessaConvert {
 	}
 
 	private Object toDouble(Object val) {
-		if (getClassReturnNewValue().equals("double")
-				|| getClassReturnNewValue().equals(Double.class.getSimpleName())) {
+		if (newValueClassEquals("double") || newValueClassEquals(Double.class.getSimpleName())) {
 			isPrimitive = true;
 			return Double.valueOf("" + dto.getSourceObject());
 		}
 		return val;
 	}
 
+	private boolean newValueClassEquals(Object ob) {
+		return getClassReturnNewValue().equals(ob);
+	}
+
 	private Object toString(Object val) {
-		if (getClassReturnNewValue().equals("String")) {
+		if (newValueClassEquals("String")) {
 			isPrimitive = true;
 			return "" + dto.getSourceObject();
 		}
