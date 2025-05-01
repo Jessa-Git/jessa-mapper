@@ -28,7 +28,7 @@ public class JessaConvert {
 	}
 
 	public JessaConvert byClassObject() {
-		if (!isPrimitive && !dto.getReturnValueClassDestiny().isEnum())
+		if (Boolean.TRUE.equals(!isPrimitive) && !dto.getReturnValueClassDestiny().isEnum())
 			val = MapperSubProcess.processObject(dto.getSourceObject(), dto.getReturnValueClassDestiny(),
 					dto.getMapperMethod());
 		return this;
@@ -62,6 +62,10 @@ public class JessaConvert {
 			throw new JessaMapperException("Falha ao obter class de retorno de Como Obter Conversao (HowToConvert)");
 		}
 	}
+	
+	private boolean newValueClassEquals(Object ob) {
+		return getClassReturnNewValue().equals(ob);
+	}
 
 	private Object toInt(Object val) {
 		if (newValueClassEquals("int") || newValueClassEquals(Integer.class.getSimpleName())) {
@@ -79,10 +83,7 @@ public class JessaConvert {
 		return val;
 	}
 
-	private boolean newValueClassEquals(Object ob) {
-		return getClassReturnNewValue().equals(ob);
-	}
-
+	
 	private Object toString(Object val) {
 		if (newValueClassEquals("String")) {
 			isPrimitive = true;

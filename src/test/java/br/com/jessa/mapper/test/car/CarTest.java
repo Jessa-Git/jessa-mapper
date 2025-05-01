@@ -34,7 +34,7 @@ public class CarTest {
 		CarDto carDto = new CarDto();
 		carDto.setMake("Morris");
 		carDto.setSeatCount(5);
-		carDto.setType(CarType.SEDAN.getC());
+		carDto.setType("c2");
 		
 		car= CarMapper.INSTANCE.toTestStringSourceMapToDestiny2(carDto);
         

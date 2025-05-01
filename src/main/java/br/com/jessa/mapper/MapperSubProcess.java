@@ -16,6 +16,6 @@ public class MapperSubProcess {
 		
 		Object destiny = ReflectionObjectInstance.byClasss(destinyClass);
 
-		return new MapperAction().process(source, destiny, method);
+		return MapperAction.process(source, destiny, method);
 	}
 }

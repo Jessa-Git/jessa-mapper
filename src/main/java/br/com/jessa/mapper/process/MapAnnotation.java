@@ -29,13 +29,14 @@ public class MapAnnotation {
 			boolean checkField = false;
 			String fieldName = attr.destiny();
 			for (Field field : instance.getObjectDestiny().getClass().getDeclaredFields()) {
+				
 				if (fieldName.equals(field.getName())) {
 					checkField = true;
 					break;
 				}
 			}
 			if(!checkField) {
-				throw new JessaMapperException("Erro no mapping: nome ["+fieldName+"] não encontrado na classe "+instance.getObjectDestiny().getClass().getSimpleName());
+				//throw new JessaMapperException("Erro no mapping: nome ["+fieldName+"] não encontrado na classe "+instance.getObjectDestiny().getClass().getSimpleName());
 			}
 		}
 	}

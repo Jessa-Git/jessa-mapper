@@ -18,5 +18,6 @@ public class ExampleBirdTest {
 		
 		assertEquals(bird.getAge()+"", webBird.getBirdAge());
 		assertEquals(bird.getName(), webBird.getName());
+		
 	}
 }

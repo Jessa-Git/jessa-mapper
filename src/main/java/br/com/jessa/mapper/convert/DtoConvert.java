@@ -44,7 +44,6 @@ public class DtoConvert {
 
 	
 	public void setEnumMethodName(String enumMethodName) {
-		if(enumMethodName !=null) System.out.println("DTOsetEnumMethodName>"+enumMethodName);
 		this.enumMethodName = enumMethodName;
 	}
 	public String getEnumMethodName() {
